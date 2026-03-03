@@ -7,7 +7,7 @@ name = "flowertune_smollm2-1.7b-instruct-finance"
 version = "1.0.0"
 description = "FlowerTune LLM Labs - Finance"
 license = "Apache-2.0"
-requires-python = ">=3.12"
+requires-python = ">=3.11"
 dependencies = [
     "flwr[simulation]>=1.15.0",
     "flwr-datasets>=0.3.0",
