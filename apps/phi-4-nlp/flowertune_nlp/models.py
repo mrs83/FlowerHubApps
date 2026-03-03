@@ -49,8 +49,10 @@ def get_model(model_cfg: DictConfig):
         model_cfg.name,
         quantization_config=quantization_config,
         torch_dtype=torch.bfloat16,
+        device_map="auto",
         low_cpu_mem_usage=True,
         trust_remote_code=True,
+        attn_implementation="sdpa",
     )
 
     model = prepare_model_for_kbit_training(
