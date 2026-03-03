@@ -15,7 +15,7 @@ dependencies = [
     "transformers==4.51.3",
     "trl==0.8.1",
     "peft==0.18.1",
-    "bitsandbytes>=0.49.2",
+    "bitsandbytes==0.45.5",
     "kernels>=0.11.1",
     "omegaconf==2.3.0",
     "sentencepiece==0.2.0",
