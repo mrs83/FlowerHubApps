@@ -37,7 +37,6 @@ def get_model(model_cfg: DictConfig):
             bnb_4bit_use_double_quant=True,
             bnb_4bit_quant_type="nf4",
             bnb_4bit_compute_dtype=torch.bfloat16,
-            llm_int8_enable_fp32_cpu_offload=True,
         )
     elif model_cfg.quantization == 8:
         quantization_config = BitsAndBytesConfig(load_in_8bit=True)
@@ -51,7 +50,7 @@ def get_model(model_cfg: DictConfig):
         quantization_config=quantization_config,
         torch_dtype=torch.bfloat16,
         device_map="auto",
-        low_cpu_mem_usage=True,
+        low_cpu_mem_usage=False,
         trust_remote_code=True,
         attn_implementation="sdpa",
     )
