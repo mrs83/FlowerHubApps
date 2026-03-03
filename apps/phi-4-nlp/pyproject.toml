@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "flowertune_phi-4-nlp"
-version = "1.0.1"
+version = "1.0.2"
 description = "FlowerTune LLM Labs"
 license = "Apache-2.0"
 requires-python = ">=3.11"
@@ -41,7 +41,7 @@ clientapp = "flowertune_nlp.client_app:app"
 model.name = "microsoft/phi-4"
 model.quantization = 4
 model.gradient-checkpointing = true
-model.lora.peft-lora-r = 8
+model.lora.peft-lora-r = 4
 model.lora.peft-lora-alpha = 16
 train.save-every-round = 1
 train.learning-rate-max = 5e-5

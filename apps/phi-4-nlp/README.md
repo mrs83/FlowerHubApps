@@ -18,7 +18,7 @@ The clients' models are aggregated with `FedAvg` strategy.
 - **Precision**: `bf16` for model weights.
 - **Quantization**: `4-bit` quantization for reduced memory usage.
 - **[DoRA](https://arxiv.org/abs/2402.09353) Configuration**:
-  - Rank (r): `8`
+  - Rank (r): `4`
   - Alpha: `16`
   - Target Modules:
     - `qkv_proj`

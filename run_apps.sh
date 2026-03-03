@@ -9,6 +9,7 @@ APPS_DIR="apps"
 INSTALLED_APPS=()
 WORKED_APPS=()
 FAILED_APPS=()
+FAILURE_OCCURRED=false
 
 # Check if apps directory exists
 if [ ! -d "$APPS_DIR" ]; then
@@ -58,10 +59,12 @@ for app in "$APPS_DIR"/*/; do
         else
             FAILED_APPS+=("$app_name (flwr run failed)")
             echo "'flwr run' failed for $app_name."
+            FAILURE_OCCURRED=true
         fi
     else
         FAILED_APPS+=("$app_name (Installation failed)")
         echo "Installation failed for $app_name."
+        FAILURE_OCCURRED=true
     fi
     
     # The following commands run regardless of the success/failure of the block above
@@ -74,6 +77,12 @@ for app in "$APPS_DIR"/*/; do
 
     # Return to the original directory
     cd - > /dev/null || exit
+
+    # Stop at the first failure
+    if [ "$FAILURE_OCCURRED" = true ]; then
+        echo "Failure detected. Stopping execution."
+        break
+    fi
 done
 
 echo ""

@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "flowertune_qwen2.5-7b-instruct-medical"
-version = "1.0.1"
+version = "1.0.2"
 description = "FlowerTune LLM Labs"
 license = "Apache-2.0"
 requires-python = ">=3.11"
@@ -40,13 +40,35 @@ serverapp = "flowertune_med.server_app:app"
 clientapp = "flowertune_med.client_app:app"
 
 [tool.flwr.app.config]
-# Standard round for verification
+model.name = "Qwen/Qwen2.5-7B-Instruct"
+model.quantization = 4
+model.gradient-checkpointing = true
+model.lora.peft-lora-r = 8
+model.lora.peft-lora-alpha = 32
+train.save-every-round = 1
+train.learning-rate-max = 5e-5
+train.learning-rate-min = 1e-6
+train.seq-length = 512
+train.training-arguments.output-dir = ""
+train.training-arguments.learning-rate = ""
+train.training-arguments.per-device-train-batch-size = 16
+train.training-arguments.gradient-accumulation-steps = 1
+train.training-arguments.logging-steps = 1
+train.training-arguments.num-train-epochs = 3
+train.training-arguments.max-steps = 6
+train.training-arguments.warmup-steps = 2
+train.training-arguments.save-steps = 1000
+train.training-arguments.save-total-limit = 10
+train.training-arguments.max-grad-norm = 1.0
+train.training-arguments.gradient-checkpointing = true
+train.training-arguments.lr-scheduler-type = "constant_with_warmup"
+train.training-arguments.fp16 = false
+train.training-arguments.bf16 = true
+train.training-arguments.tf32 = false
+train.training-arguments.optim = "paged_adamw_8bit"
+strategy.fraction-fit = 0.15
+strategy.fraction-evaluate = 0.0
 num-server-rounds = 1
 
-[tool.flwr.federations]
-default = "local-simulation"
-
-[tool.flwr.federations.local-simulation]
-options.num-supernodes = 10
-options.backend.client-resources.num-cpus = 4
-options.backend.client-resources.num-gpus = 1.0
+[tool.flwr.app.config.static]
+dataset.name = "medalpaca/medical_meadow_medical_flashcards"
