@@ -26,7 +26,7 @@ The clients' models are aggregated with `FedAvg` strategy.
     - `gate_up_proj`
     - `down_proj`
 - **Training Configuration**:
-  - Batch size: `8`
+  - Batch size: `4`
   - Maximum number of steps: `10`
   - Total number of rounds: `1`
   - Fraction fit per round: `0.1`
