@@ -14,8 +14,6 @@ The clients' models are aggregated with `FedAvg` strategy.
 
 ### Qwen/Qwen3-4B
 
-For the **Qwen/Qwen3-4B** model we adopted the following fine-tuning methodology:
-
 - **Precision**: `bf16` for model weights.
 - **Quantization**: `4-bit` quantization for reduced memory usage.
 - **Optimizer**: `paged_adamw_8bit`
