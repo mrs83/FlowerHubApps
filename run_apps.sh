@@ -11,6 +11,9 @@ WORKED_APPS=()
 FAILED_APPS=()
 FAILURE_OCCURRED=false
 
+# Apps to exclude from execution
+EXCLUDE_APPS=("phi-4-nlp")
+
 # Check if apps directory exists
 if [ ! -d "$APPS_DIR" ]; then
     echo "Error: Directory '$APPS_DIR' not found."
@@ -22,6 +25,12 @@ for app in "$APPS_DIR"/*/; do
     # Remove trailing slash for cleaner output
     app_path="${app%/}"
     app_name=$(basename "$app_path")
+
+    # Skip if it's in the exclusion list
+    if [[ " ${EXCLUDE_APPS[@]} " =~ " ${app_name} " ]]; then
+        echo "Skipping excluded app: $app_name"
+        continue
+    fi
 
     # Skip if it's not a directory or if it's the .venv directory itself
     if [ ! -d "$app_path" ] || [ "$app_name" == ".venv" ]; then
